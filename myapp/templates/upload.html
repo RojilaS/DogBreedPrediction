@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dog Breed Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-image: url('/media/dog.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #333; /* Text color for the body */
+        }
+    
+        h1 {
+            font-family: "Georgia", Times, serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #fff; /* Text color for the header */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow */
+        }
+    
+        h2 {
+            font-family: "Georgia", Times, serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #AFEEEE; /* Text color for h2 */
+        }
+    
+        form {
+            background-color: #000000
+;
+            margin: 20px auto;
+            max-width: 400px;
+            padding: 20px;
+            border: 2px solid #008080; /* Border color for the form */
+            border-radius: 10px; /* Border radius for a slightly rounded box */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+    
+        input[type="file"] {
+            margin: 10px 0;
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    
+        button {
+            background-color: #fff;
+            color: #000000;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    
+        h3 {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+        label{
+                font-family: "Georgia", Times, serif;
+                font-size: 18px;
+                font-weight: bold;
+                color: #fff;
+            }
+
+    
+        /* Style for the result box */
+        .result-box {
+            width: 300px;
+            height: 200px;
+            background-color: #808080; /* Background color */
+            color: #fff; /* Text color */
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
+            border: 4px solid #008080;
+            font-family: 'YourStylishFont', sans-serif; /* Your preferred font */
+            font-size: 18px;
+        }
+    
+        /* Style for the predicted breed text */
+        .predicted-breed {
+            font-size: 20px;
+            font-family: 'YourThirdFont', cursive;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    
+    
+    
+</head>
+<body>
+    <h1>Predict Dog Breed</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <h2>"A snapshot, a revelation: Discover your dog's hidden breed."</h2><br>
+        {% csrf_token %}
+        <div class="file-upload">
+            <label for="image">Upload an image of your dog:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+        <button type="submit" class="predict-button">Predict</button>
+    </form>
+    
+   
+    {% if prediction %}
+    <div style="background-color: #333; color: white; width: 300px; margin: 20px auto; text-align: center; padding: 20px; border-radius: 10px; font-family: 'YourStylishFont', 'YourSecondFont', sans-serif;">
+        <!-- Add a container for the image -->
+        <div style="width: 100px; height: 100px; margin: 0 auto; border: 2px solid #008080; border-radius: 50%; overflow: hidden;">
+            <!-- Add an image element to display the uploaded image -->
+            <img id="uploaded-image" src="{{result.image.url}}" alt="Uploaded Dog Image" style="max-width: 100%; max-height: 100%;">
+        </div>
+        <h3 style="font-size: 20px; font-family: 'YourThirdFont', cursive; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            Predicted Dog Breed:
+            <br>
+            {{ prediction }}
+        </h3>
+    </div>
+    
+{% endif %}
+</body> 
+
+</html>
